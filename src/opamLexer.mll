@@ -67,7 +67,9 @@ let char_for_decimal_code lexbuf i =
   let c = 100 * (Char.code(Lexing.lexeme_char lexbuf i) - 48) +
            10 * (Char.code(Lexing.lexeme_char lexbuf (i+1)) - 48) +
                 (Char.code(Lexing.lexeme_char lexbuf (i+2)) - 48) in
-  if (c < 0 || c > 255) then error "illegal escape sequence" ;
+  if (c < 0 || c > 255) then
+  error
+  (Printf.sprintf "illegal escape sequence: %c %d" (Char.chr c) c) ;
   Char.chr c
 
 let char_for_hexadecimal_code lexbuf i =
